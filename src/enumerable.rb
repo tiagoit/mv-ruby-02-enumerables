@@ -77,11 +77,11 @@ arr = [1, 2, 3, 4]
 # end
 # puts arr
 
-# puts arr.my_all?(&:positive?)
-# puts arr.my_any? { |item| item > 2 }
-# puts arr.my_none? { |item| item > 2 }
-# puts arr.my_count { |item| item >= 2 }
-# puts arr.my_inject { |acc, item| acc + item }
+# puts(arr.my_all?(&:positive?))
+# puts(arr.my_any? { |item| item > 2 })
+# puts(arr.my_none? { |item| item > 2 })
+# puts(arr.my_count { |item| item >= 2 })
+# puts(arr.my_inject { |acc, item| acc + item })
 
 # 10 - Test your #my_inject by creating a method called #multiply_els which multiplies all the
 # elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40
@@ -94,7 +94,7 @@ arr = [1, 2, 3, 4]
 # puts arr.my_map(proc_gr_eq2)
 
 # 12 - Modify your #my_map method to take either a proc or a block.
-puts arr.my_map { |item| item >= 2 }
+puts(arr.my_none? { |item| item >= 2 })
 puts
 proc_gr_eq2 = proc { |item| item >= 2 }
 puts arr.my_map(&proc_gr_eq2)
