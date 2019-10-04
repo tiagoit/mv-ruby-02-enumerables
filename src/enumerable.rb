@@ -56,13 +56,15 @@ module Enumerable
     result
   end
 
-  def my_inject(acc = 0)
-    my_each { |item| acc = yield(acc, item) }
+  def my_inject(acc = nil)
+    array = acc ? self : self[1..-1]
+    acc ||= self[0]
+    array.my_each { |item| acc = yield(acc, item) }
     acc
   end
 end
 
-arr = [1, 2, 3, 4]
+arr = [2, 3, 4]
 
 # arr.my_each do |item|
 #   puts item
@@ -81,7 +83,12 @@ arr = [1, 2, 3, 4]
 # puts(arr.my_any? { |item| item > 2 })
 # puts(arr.my_none? { |item| item > 2 })
 # puts(arr.my_count { |item| item >= 2 })
-# puts(arr.my_inject { |acc, item| acc + item })
+
+# Inject
+puts(arr.my_inject { |acc, item| acc + item })
+puts(arr.my_inject { |acc, item| acc * item })
+puts(arr.my_inject(10) { |acc, item| acc + item })
+puts(arr.my_inject(10) { |acc, item| acc * item })
 
 # 10 - Test your #my_inject by creating a method called #multiply_els which multiplies all the
 # elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40
@@ -94,7 +101,7 @@ arr = [1, 2, 3, 4]
 # puts arr.my_map(proc_gr_eq2)
 
 # 12 - Modify your #my_map method to take either a proc or a block.
-puts(arr.my_none? { |item| item >= 2 })
-puts
-proc_gr_eq2 = proc { |item| item >= 2 }
-puts arr.my_map(&proc_gr_eq2)
+# puts(arr.my_none? { |item| item >= 2 })
+# puts
+# proc_gr_eq2 = proc { |item| item >= 2 }
+# puts arr.my_map(&proc_gr_eq2)
