@@ -3,105 +3,114 @@
 
 module Enumerable
   def my_each
-    length.times do |i|
-      yield(self[i])
-    end
+    return to_enum unless block_given?
+
+    length.times { |i| yield(self[i]) }
+    self
   end
 
   def my_each_with_index
-    length.times do |i|
-      yield(self[i], i)
-    end
+    return to_enum unless block_given?
+
+    length.times { |i| yield(self[i], i) }
+    self
   end
 
   def my_select
-    selected_items = []
-    my_each do |item|
-      selected_items << item if yield(item)
-    end
-    selected_items
+    return to_enum unless block_given?
+
+    selected = []
+    my_each { |obj| selected << obj if yield(obj) }
+    selected
   end
 
-  def my_all?
-    my_each { |item| return false unless yield(item) }
+  def my_all?(pattern = nil)
+    if block_given?
+      my_each { |obj| return false unless yield(obj) }
+    elsif pattern
+      my_each do |obj|
+        return false unless pattern === obj
+      end
+    else
+      my_each { |obj| return false unless obj }
+      true
+    end
     true
   end
 
-  def my_any?
-    my_each { |item| return true if yield(item) }
+  def my_any?(pattern = nil)
+    if block_given?
+      my_each { |obj| return true if yield(obj) }
+    elsif pattern
+      my_each do |obj|
+        return true if pattern === obj
+      end
+    else
+      my_each { |obj| return true if obj }
+    end
     false
   end
 
-  def my_none?
-    my_each { |item| return false if yield(item) }
+  def my_none?(pattern = nil)
+    if block_given?
+      # my_each { |obj| return true if yield(obj) }
+      my_each { |obj| return false if yield(obj) }
+    elsif pattern
+      my_each do |obj|
+        # return true if pattern === obj
+        return false if pattern === obj
+      end
+    else
+      my_each { |obj| return false if obj }
+    end
     true
   end
 
-  def my_count
+  def my_count(item = nil)
     count = 0
-    my_each { |item| count += 1 if yield(item) }
+    if block_given?
+      my_each { |item_| count += 1 if yield(item_) }
+    elsif item
+      my_each { |item_| count += 1 if item_ == item }
+    else
+      count = length
+    end
     count
   end
 
   # 11 - Modify your #my_map method to take a proc instead.
   # def my_map(proc)
+  # return to_enum unless block_given?
+
   #   result = []
   #   my_each { |item| result << proc.call(item) }
   #   result
   # end
 
   def my_map
-    result = []
-    my_each { |item| result << yield(item) }
-    result
+    return to_enum unless block_given?
+
+    new_array = []
+    my_each { |item| new_array << yield(item) }
+    new_array
   end
 
-  def my_inject(acc = nil)
-    array = acc ? self : self[1..-1]
-    acc ||= self[0]
-    array.my_each { |item| acc = yield(acc, item) }
-    acc
+  def my_inject(*args)
+    initial, sym = nil
+    args.each do |arg|
+      initial = arg if arg.is_a? Numeric
+      sym = arg unless arg.is_a? Numeric
+    end
+
+    raise LocalJumpError 'no block given' unless block_given? || initial || sym
+
+    array = initial ? self : self[1..-1]
+    initial ||= self[0]
+    if block_given?
+      array.my_each { |item| initial = yield(initial, item) }
+    elsif sym
+      array.my_each { |item| initial = initial.public_send(sym, item) }
+    end
+    initial
   end
 end
-
-arr = [2, 3, 4]
-
-# arr.my_each do |item|
-#   puts item
-# end
-
-# arr.my_each_with_index do |item, index|
-#   puts index.to_s << ' ' << item.to_s
-# end
-
-# arr = arr.my_select do |item|
-#   item >= 2
-# end
-# puts arr
-
-# puts(arr.my_all?(&:positive?))
-# puts(arr.my_any? { |item| item > 2 })
-# puts(arr.my_none? { |item| item > 2 })
-# puts(arr.my_count { |item| item >= 2 })
-
-# Inject
-puts(arr.my_inject { |acc, item| acc + item })
-puts(arr.my_inject { |acc, item| acc * item })
-puts(arr.my_inject(10) { |acc, item| acc + item })
-puts(arr.my_inject(10) { |acc, item| acc * item })
-
-# 10 - Test your #my_inject by creating a method called #multiply_els which multiplies all the
-# elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40
-# def multiply_els arr
-#   arr.my_inject(1) { |acc, item| acc * item }
-# end
-# puts multiply_els(arr);
-
-# 11 - Modify your #my_map method to take a proc instead.
-# puts arr.my_map(proc_gr_eq2)
-
-# 12 - Modify your #my_map method to take either a proc or a block.
-# puts(arr.my_none? { |item| item >= 2 })
-# puts
-# proc_gr_eq2 = proc { |item| item >= 2 }
-# puts arr.my_map(&proc_gr_eq2)
