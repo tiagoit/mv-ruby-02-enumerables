@@ -72,22 +72,22 @@ array = [1, 2, 3, 4]
 # puts array.my_any?(/d/) # false
 
 # NONE
-# puts [].my_none? # true
-# puts array.my_none? # false
-# puts(array.my_none? { |obj| obj > 1 }) # false
-# puts
+puts [].my_none? # true
+puts array.my_none? # false
+puts(array.my_none? { |obj| obj > 1 }) # false
+puts
 
-# array = %w[a a a a]
-# puts array.my_none?('a') # false
-# array = %w[a a a b]
-# puts array.my_none?('a') # false
-# array = [1, 2, 3, 4]
-# puts array.my_none?(Numeric) # false
-# array = [1, 2, 3, '4']
-# puts array.my_none?(Numeric) # false
-# array = %w[Tiago Tiago Tiago]
-# puts array.my_none?(/T\w+/) # false
-# puts array.my_none?(/d/) # true
+array = %w[a a a a]
+puts array.my_none?('a') # false
+array = %w[a a a b]
+puts array.my_none?('a') # false
+array = [1, 2, 3, 4]
+puts array.my_none?(Numeric) # false
+array = [1, 2, 3, '4']
+puts array.my_none?(Numeric) # false
+array = %w[Tiago Tiago Tiago]
+puts array.my_none?(/T\w+/) # false
+puts array.my_none?(/d/) # true
 
 # COUNT
 # puts [].my_count # 0
@@ -104,18 +104,18 @@ array = [1, 2, 3, 4]
 # puts(array.my_inject) # should raise no block error
 
 # # Inject { block }
-puts(array.my_inject { |acc, item| acc + item }) # 10
-puts(array.my_inject { |acc, item| acc * item }) # 24
-# Inject (initial) { block }
-puts(array.my_inject(10) { |acc, item| acc + item }) # 20
-puts(array.my_inject(10) { |acc, item| acc * item }) # 240
+# puts(array.my_inject { |acc, item| acc + item }) # 10
+# puts(array.my_inject { |acc, item| acc * item }) # 24
+# # Inject (initial) { block }
+# puts(array.my_inject(10) { |acc, item| acc + item }) # 20
+# puts(array.my_inject(10) { |acc, item| acc * item }) # 240
 
-# # Inject (sym)
-puts(array.my_inject(:+)) # 10
-puts(array.my_inject(:*)) # 24
-# Inject (initial, sym)
-puts(array.my_inject(10, :+)) # 20
-puts(array.my_inject(10, :*)) # 240
+# # # Inject (sym)
+# puts(array.my_inject(:+)) # 10
+# puts(array.my_inject(:*)) # 24
+# # Inject (initial, sym)
+# puts(array.my_inject(10, :+)) # 20
+# puts(array.my_inject(10, :*)) # 240
 
 # 10 - Test your #my_inject by creating a method called #multiply_els which multiplies all the
 # elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40

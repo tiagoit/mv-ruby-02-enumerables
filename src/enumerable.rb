@@ -65,8 +65,12 @@ module Enumerable
   end
 
   def pattern_match?(obj, pattern)
-    (pattern.is_a?(String) && obj.eql?(pattern)) ||
-      (pattern.is_a?(Class) && obj.is_a?(pattern)) ||
+    # (pattern.respond_to?(:match) && pattern.match?(obj)) ||
+    #   (obj.respond_to?(:is_a?) && (pattern.is_a?(Class) || pattern.is_a?(Module)) && obj.is_a?(pattern)) ||
+    #   (obj.respond_to?(:eql?) && obj.eql?(pattern))
+
+    (pattern.is_a?(Class) && obj.is_a?(pattern)) ||
+      (pattern.is_a?(String) && obj.eql?(pattern)) ||
       (pattern.is_a?(Regexp) && pattern.match(obj))
   end
 

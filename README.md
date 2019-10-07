@@ -72,6 +72,9 @@ Implementation of the most used methods on the Enumerable Ruby class.
 Uncomment the examples and see the results on IRB console.
 
 
+## Debug
+rdebug-ide --host 127.0.0.1 --port 1234 --dispatcher-port 26162 ./main.rb
+
 <!-- LICENSE -->
 ## License
 
