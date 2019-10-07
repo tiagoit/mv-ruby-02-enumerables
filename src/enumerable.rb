@@ -29,7 +29,7 @@ module Enumerable
       my_each { |obj| return false unless yield(obj) }
     elsif pattern
       my_each do |obj|
-        return false unless pattern === obj
+        return false unless pattern_match?(obj, pattern)
       end
     else
       my_each { |obj| return false unless obj }
@@ -43,7 +43,7 @@ module Enumerable
       my_each { |obj| return true if yield(obj) }
     elsif pattern
       my_each do |obj|
-        return true if pattern === obj
+        return true if pattern_match?(obj, pattern)
       end
     else
       my_each { |obj| return true if obj }
@@ -53,17 +53,21 @@ module Enumerable
 
   def my_none?(pattern = nil)
     if block_given?
-      # my_each { |obj| return true if yield(obj) }
       my_each { |obj| return false if yield(obj) }
     elsif pattern
       my_each do |obj|
-        # return true if pattern === obj
-        return false if pattern === obj
+        return false if pattern_match?(obj, pattern)
       end
     else
       my_each { |obj| return false if obj }
     end
     true
+  end
+
+  def pattern_match?(obj, pattern)
+    (pattern.is_a?(String) && obj.eql?(pattern)) ||
+      (pattern.is_a?(Class) && obj.is_a?(pattern)) ||
+      (pattern.is_a?(Regexp) && pattern.match(obj))
   end
 
   def my_count(item = nil)
@@ -96,13 +100,7 @@ module Enumerable
   end
 
   def my_inject(*args)
-    initial, sym = nil
-    args.each do |arg|
-      initial = arg if arg.is_a? Numeric
-      sym = arg unless arg.is_a? Numeric
-    end
-
-    raise LocalJumpError 'no block given' unless block_given? || initial || sym
+    initial, sym = prepare_params(*args, block_given?)
 
     array = initial ? self : self[1..-1]
     initial ||= self[0]
@@ -112,5 +110,17 @@ module Enumerable
       array.my_each { |item| initial = initial.public_send(sym, item) }
     end
     initial
+  end
+
+  def prepare_params(*args, block)
+    initial, sym = nil
+    args.each do |arg|
+      initial = arg if arg.is_a? Numeric
+      sym = arg unless arg.is_a? Numeric
+    end
+
+    raise LocalJumpError 'no block given' unless block || initial || sym
+
+    [initial, sym]
   end
 end
