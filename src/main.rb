@@ -6,33 +6,25 @@ require './enumerable'
 array = [1, 2, 3, 4]
 
 # EACH
-# puts [].each
 # puts [].my_each
+puts array.my_each
+# puts([].each { |obj| puts obj })
+# array.my_each { |obj| puts obj }
 
-# puts array.each
-# puts array.my_each
-
-# puts(array.each { |obj| puts obj })
-# puts(array.my_each { |obj| puts obj })
+# puts((1..5).my_each)
+# (1..5).my_each { |obj| puts obj }
 
 # EACH_WITH_INDEX
 # puts [].each_with_index
-# puts [].my_each_with_index
-
 # puts array.each_with_index
-# puts array.my_each_with_index
-
 # puts(array.each_with_index { |obj, i| puts "#{i} #{obj}"})
-# puts(array.my_each_with_index { |obj, i| puts "#{i} #{obj}"})
+
+# puts((1..5).my_each_with_index)
+# puts((1..5).my_each_with_index { |obj, i| puts "#{i} #{obj}"})
 
 # SELECT
-# puts [].select
 # puts [].my_select
-
-# puts array.select
 # puts array.my_select
-
-# puts(array.select { |obj| obj >= 2 })
 # puts(array.my_select { |obj| obj >= 2 })
 
 # ALL?
@@ -72,22 +64,22 @@ array = [1, 2, 3, 4]
 # puts array.my_any?(/d/) # false
 
 # NONE
-puts [].my_none? # true
-puts array.my_none? # false
-puts(array.my_none? { |obj| obj > 1 }) # false
-puts
+# puts [].my_none? # true
+# puts array.my_none? # false
+# puts(array.my_none? { |obj| obj > 1 }) # false
+# puts
 
-array = %w[a a a a]
-puts array.my_none?('a') # false
-array = %w[a a a b]
-puts array.my_none?('a') # false
-array = [1, 2, 3, 4]
-puts array.my_none?(Numeric) # false
-array = [1, 2, 3, '4']
-puts array.my_none?(Numeric) # false
-array = %w[Tiago Tiago Tiago]
-puts array.my_none?(/T\w+/) # false
-puts array.my_none?(/d/) # true
+# array = %w[a a a a]
+# puts array.my_none?('a') # false
+# array = %w[a a a b]
+# puts array.my_none?('a') # false
+# array = [1, 2, 3, 4]
+# puts array.my_none?(Numeric) # false
+# array = [1, 2, 3, '4']
+# puts array.my_none?(Numeric) # false
+# array = %w[Tiago Tiago Tiago]
+# puts array.my_none?(/T\w+/) # false
+# puts array.my_none?(/d/) # true
 
 # COUNT
 # puts [].my_count # 0

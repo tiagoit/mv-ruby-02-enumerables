@@ -5,14 +5,14 @@ module Enumerable
   def my_each
     return to_enum unless block_given?
 
-    length.times { |i| yield(self[i]) }
+    to_a.length.times { |i| yield(to_a[i]) }
     self
   end
 
   def my_each_with_index
     return to_enum unless block_given?
 
-    length.times { |i| yield(self[i], i) }
+    to_a.length.times { |i| yield(to_a[i], i) }
     self
   end
 
