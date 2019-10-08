@@ -7,7 +7,7 @@ array = [1, 2, 3, 4]
 
 # EACH
 # puts [].my_each
-puts array.my_each
+# puts array.my_each
 # puts([].each { |obj| puts obj })
 # array.my_each { |obj| puts obj }
 
@@ -44,6 +44,10 @@ puts array.my_each
 # array = %w[Tiago Tiago Tiago]
 # puts array.my_all?(/T\w+/) # true
 # puts array.my_all?(/d/) # false
+# puts
+
+# array = [5, 5, 5, 5]
+# puts array.my_all?(5) # true
 
 # ANY?
 # puts [].my_any? # false
@@ -80,6 +84,10 @@ puts array.my_each
 # array = %w[Tiago Tiago Tiago]
 # puts array.my_none?(/T\w+/) # false
 # puts array.my_none?(/d/) # true
+# puts
+
+# puts([1, 2, 3, 4].my_none?(5)) # true
+# puts([1, 2, 3, 4, 5].my_none?(5)) # false
 
 # COUNT
 # puts [].my_count # 0
