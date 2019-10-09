@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# ./lib/enumerable.rb
 # frozen_string_literal: true
 
 module Enumerable

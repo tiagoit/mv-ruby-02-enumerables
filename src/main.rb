@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
+# ./src/main.rb
 # frozen_string_literal: true
 
-require './enumerable'
+require './lib/enumerable'
 
 array = [1, 2, 3, 4]
 
