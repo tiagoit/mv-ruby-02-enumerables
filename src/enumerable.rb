@@ -100,10 +100,10 @@ module Enumerable
   end
 
   def my_inject(*args)
-    initial, sym = prepare_params(*args, block_given?)
+    initial, sym = prepare_params(*args)
 
-    array = initial ? self : self[1..-1]
-    initial ||= self[0]
+    array = initial ? to_a : to_a[1..-1]
+    initial ||= to_a[0]
     if block_given?
       array.my_each { |item| initial = yield(initial, item) }
     elsif sym
@@ -112,15 +112,12 @@ module Enumerable
     initial
   end
 
-  def prepare_params(*args, block)
+  def prepare_params(*args)
     initial, sym = nil
     args.each do |arg|
       initial = arg if arg.is_a? Numeric
       sym = arg unless arg.is_a? Numeric
     end
-
-    raise LocalJumpError 'no block given' unless block || initial || sym
-
     [initial, sym]
   end
 end
