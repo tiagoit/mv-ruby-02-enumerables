@@ -88,6 +88,12 @@ array = [1, 2, 3, 4]
 
 # puts([1, 2, 3, 4].my_none?(5)) # true
 # puts([1, 2, 3, 4, 5].my_none?(5)) # false
+# puts
+
+# words = %w[dog door rod blade]
+# words[0] = 5
+# puts(words.none?(5))
+# puts(words.my_none?(5))
 
 # COUNT
 # puts [].my_count # 0
@@ -103,19 +109,28 @@ array = [1, 2, 3, 4]
 # INJECT
 # puts(array.my_inject) # should raise no block error
 
-# # Inject { block }
-# puts(array.my_inject { |acc, item| acc + item }) # 10
-# puts(array.my_inject { |acc, item| acc * item }) # 24
-# # Inject (initial) { block }
-# puts(array.my_inject(10) { |acc, item| acc + item }) # 20
-# puts(array.my_inject(10) { |acc, item| acc * item }) # 240
+# Inject { block }
+puts(array.my_inject { |acc, item| acc + item }) # 10
+puts(array.my_inject { |acc, item| acc * item }) # 24
+# Inject (initial) { block }
+puts(array.my_inject(10) { |acc, item| acc + item }) # 20
+puts(array.my_inject(10) { |acc, item| acc * item }) # 240
 
-# # # Inject (sym)
+# # Inject (sym)
 # puts(array.my_inject(:+)) # 10
 # puts(array.my_inject(:*)) # 24
 # # Inject (initial, sym)
 # puts(array.my_inject(10, :+)) # 20
 # puts(array.my_inject(10, :*)) # 240
+# puts
+
+# range = Range.new(5, 50)
+# puts(range.inject(4) { |prod, n| prod * n })
+# puts(range.my_inject(4) { |prod, n| prod * n })
+
+# range = Range.new(5, 50)
+# puts(range.inject(2, :*))
+# puts(range.my_inject(2, :*))
 
 # 10 - Test your #my_inject by creating a method called #multiply_els which multiplies all the
 # elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40
