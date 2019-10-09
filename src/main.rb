@@ -108,7 +108,7 @@ array = [1, 2, 3, 4]
 # puts array.my_count('a') # 3
 
 # INJECT
-# puts(array.my_inject) # should raise no block error
+puts(array.my_inject) # should raise no block error
 
 # Inject { block }
 puts(array.my_inject { |acc, item| acc + item }) # 10
@@ -129,9 +129,9 @@ puts(array.my_inject(10) { |acc, item| acc * item }) # 240
 # puts(range.inject(4) { |prod, n| prod * n })
 # puts(range.my_inject(4) { |prod, n| prod * n })
 
-# range = Range.new(5, 50)
-# puts(range.inject(2, :*))
-# puts(range.my_inject(2, :*))
+range = Range.new(5, 50)
+puts(range.inject(2, :*))
+puts(range.my_inject(2, :*))
 
 # 10 - Test your #my_inject by creating a method called #multiply_els which multiplies all the
 # elements of the array together by using #my_inject, e.g. multiply_els([2,4,5]) #=> 40
