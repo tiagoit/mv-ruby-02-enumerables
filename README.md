@@ -57,6 +57,7 @@ https://github.com/othneildrew/Best-README-Template/blob/master/README.md
 ## About The Project
 
 Implementation of the most used methods on the Enumerable Ruby class.
+Project Link: [https://github.com/ferreirati/mv-ruby-02-enumerables](https://github.com/ferreirati/mv-ruby-02-enumerables)
 
 ### Built With
 
@@ -83,13 +84,10 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 
 <!-- CONTACT -->
-## Contact
+## 📞 Contact
+- **Tiago Ferreira** - [@tiagoit](https://github.com/tiagoit)
 
-Project Link: [https://github.com/ferreirati/mv-ruby-02-enumerables](https://github.com/ferreirati/mv-ruby-02-enumerables)
-
-- **Tiago Ferreira** - [@ferreirati](https://github.com/ferreirati)
-
-
+Feel free to connect with me on [LinkedIn](https://www.linkedin.com/in/tiagoit-dev/) or drop me a line at <tiagoitferreira@gmail.com>.
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
