@@ -65,8 +65,6 @@ Project Link: [https://github.com/ferreirati/mv-ruby-02-enumerables](https://git
 * [VS Code](https://code.visualstudio.com/)
 
 
-
-
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -74,7 +72,12 @@ Uncomment the examples and see the results on IRB console.
 
 
 ## Debug
-rdebug-ide --host 127.0.0.1 --port 1234 --dispatcher-port 26162 ./main.rb
+`rdebug-ide --host 127.0.0.1 --port 1234 --dispatcher-port 26162 ./main.rb`
+
+
+## Run the tests
+`./tests/enumerable_test.rb`
+
 
 <!-- LICENSE -->
 ## License
